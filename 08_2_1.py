@@ -41,10 +41,10 @@ for step in range(10001):
     cost = -torch.mean(Y * torch.log(Y_pred) + (1 - Y) * torch.log(1 - Y_pred))
 
     # 역전파 (체인 룰 사용)
-    d_Y_pred = (Y_pred - Y) / (Y_pred * (1.0 - Y_pred) + 1e-7)  # 0으로 나누는 것을 방지
+    d_Y_pred = (Y_pred - Y) / (Y_pred * (1.0 - Y_pred) + 1e-7)  # 0으로 나누는 것을 방지 # cost를 Y_pred로 미분
 
     # 두 번째 레이어의 기울기 계산
-    d_l2 = d_Y_pred * sigmoid_prime(l2)
+    d_l2 = d_Y_pred * sigmoid_prime(l2) # sigmoid를 l2로
     d_b2 = d_l2
     d_w2 = torch.matmul(torch.transpose(a1, 0, 1), d_b2)
 
